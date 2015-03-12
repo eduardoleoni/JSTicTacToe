@@ -10,18 +10,22 @@ function randTurn(){
 }
 
 function draw(where){
-
-    if ($("#"+where).html() == ""){
+    if ($("#"+where).html() === ""){
         $("#"+where).html(turn);
     }
-
-    checkVictory();
-
-
+    
+    lastPlayed = turn; // just to make sure
+    
+    if (checkVictory() == true){
+        reset();
+    }
+    
+    changeTurn();
 }
 
 function changeTurn(){
-    if (turn == "o"){
+    
+    if (turn === "o"){
         turn = "x";
     }else{
         turn = "o";
@@ -47,11 +51,11 @@ function checkVictory(){
     block_3_3 = $("#block_3_3").html();
 
     //Checking draw
-    if ((block_1_1 != "") && (block_1_2.html != "") && (block_1_3.html != "") &&
+    if ((block_1_1 != "") && (block_1_2 != "") && (block_1_3 != "") &&
        (block_2_1 != "") && (block_2_2 != "") && (block_2_3 != "") &&
        (block_3_1 != "") && (block_3_2 != "") && (block_3_3 != "")){
        alert("Draw!");
-       reset();
+       return true;
     }
 
 
@@ -59,25 +63,30 @@ function checkVictory(){
     if (block_1_1 != "")
         if ((block_1_1 == block_2_1) && (block_1_1 == block_3_1)){
             victory(block_1_1);
+            return true;
         }
 
     if (block_2_1 != "")
         if ((block_2_1 == block_2_2) && (block_2_1 == block_2_3)){
             victory(block_2_1);
+            return true;
         }
     if (block_3_1 != "")
         if ((block_3_1 == block_3_2) && (block_3_1 == block_3_3)){
             victory(block_3_1);
+            return true;
         }
 
     //Diagonals
     if (block_1_1 != "")
         if ((block_1_1 == block_2_2) && (block_1_1 == block_3_3)){
             victory(block_1_1);
+            return true;
         }
     if (block_3_1 != "")
         if ((block_3_1 == block_2_2) && (block_3_1 == block_1_3)){
             victory(block_3_1);
+            return true;
         }
 
 
@@ -85,25 +94,24 @@ function checkVictory(){
     if (block_1_3 != "")
         if ((block_1_3 == block_2_3) && (block_1_3 == block_3_3)){
             victory(block_1_3);
+            return true;
         }
     if (block_1_2 != "")
         if ((block_1_2 == block_2_2) && (block_1_2 == block_3_2)){
             victory(block_1_2);
+            return true;
         }
     if (block_1_1 != "")
-        if ((block_1_1 == block_2_1) && (block_1_1 == block_3_1)){
+        if ((block_1_1 == block_1_2) && (block_1_1 == block_1_3)){
             victory(block_1_1);
+            return true;
         }
-
-
-    changeTurn();
 
 
 }
 
 function victory(whose){
     alert(whose + " wins");
-    reset();
 }
 
 function reset(){
@@ -118,4 +126,5 @@ function reset(){
     $("#block_1_3").html("");            
     $("#block_2_3").html("");
     $("#block_3_3").html("");
+    startedWith = turn;
 }

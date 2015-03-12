@@ -1,13 +1,16 @@
  function computerPlays(){
+    
 
-   if (checksRiskOfLosingOrWinningPossibility() === false){
-        intelligentPlay();
+    if (turn !== playerTurn){
+    
+        if (checksRiskOfLosingOrWinningPossibility() === false){
+            intelligentPlay();
+        }
     }
 }
 
 
 function checksRiskOfLosingOrWinningPossibility(){
-
 
     for (j = 1; j < 3; j++){
 
@@ -131,8 +134,6 @@ function checksRiskOfLosingOrWinningPossibility(){
     }
 
 
-
-
     //Plays if there's losing risk or winning chance, if not, just comes back
     if (typeof bestShot !== 'undefined') {
         draw(bestShot[0]);
@@ -151,7 +152,7 @@ function calculateBestShot(shot){
             if (bestShot[1] == "win")
                 return bestShot;
             else
-                shot;
+                return shot;
         }else{
             return shot;
         }
@@ -222,5 +223,29 @@ function randomPlay(){
         randomPlay();
     }else{
         draw("block_" + number1 + "_" + number2);
+    }
+}
+
+
+function checksRightTurn(){
+    //Couldn't identify the reason why, but sometimes the turns are mixed up, this make sure it doesn't
+    os = 0;
+    xs = 0;
+    $( ".block" ).each(function( index ) {
+        if ($("#"+this.id).html() == "o"){
+            os = os + 1;
+        }
+        
+        if ($("#"+this.id).html() == "x"){
+            xs = xs + 1;
+        }
+    });
+    
+    if (startedWith == "x"){
+        if ((xs <= os) && (turn == "o"))
+            changeTurn();
+    }else{
+        if ((xs >= os) && (turn == "x"))
+            changeTurn();
     }
 }

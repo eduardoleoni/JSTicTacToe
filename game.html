@@ -38,30 +38,30 @@
         <div id ="block_1_3" class = "block column1 line3"></div>
         <div id ="block_2_3" class = "block column2 line3"></div>
         <div id ="block_3_3" class = "block column3 line3"></div>
-    </body>
-    
-    <script>
+        
+        <script>
         $( document ).ready(function() {
+            
             turn = randTurn();
             playerTurn = turn;
+            startedWith = playerTurn;
             againstComputer = true;
-
-            setInterval(function(){
-                if (againstComputer === true){
-                    if (turn !== playerTurn){
-                        computerPlays();
-                    }
-                }
-            }, 500);
+            setInterval(computerPlays, 500);
             
         });
         
         $( ".block" ).click(function() {
+            checksRightTurn();
             if (playerTurn === turn){
                 draw(this.id);
+            }else{
+                computerPlays();
             }
         });
         
-    </script>
+     </script>
+    
+    </body>
+    
     
   </html>
