@@ -13,14 +13,17 @@ function draw(where){
     if ($("#"+where).html() === ""){
         $("#"+where).html(turn);
     }
-       
+    flipTurn();
     if (checkVictory() == true){
         reset();
+    }else{
+       setTimeout(computerPlays, 500);
     }
     
-    flipTurn();
     
-    setInterval(computerPlays,400);
+    
+   
+    
 }
 
 function flipTurn(){
@@ -121,15 +124,5 @@ function victory(whose){
 }
 
 function reset(){
-    $("#block_1_1").html("");
-    $("#block_2_1").html("");
-    $("#block_3_1").html("");
-
-    $("#block_1_2").html("");
-    $("#block_2_2").html("");
-    $("#block_3_2").html("");
-
-    $("#block_1_3").html("");            
-    $("#block_2_3").html("");
-    $("#block_3_3").html("");
+    location.reload();
 }
