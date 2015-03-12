@@ -13,24 +13,28 @@ function draw(where){
     if ($("#"+where).html() === ""){
         $("#"+where).html(turn);
     }
-    
-    lastPlayed = turn; // just to make sure
-    
+       
     if (checkVictory() == true){
         reset();
     }
     
-    changeTurn();
+    flipTurn();
+    
+    setInterval(computerPlays,400);
 }
 
-function changeTurn(){
+function flipTurn(){
     
     if (turn === "o"){
-        turn = "x";
+        changeTurn("x");
     }else{
-        turn = "o";
+        changeTurn("o");
     }
 
+}
+
+function changeTurn(nt){
+    turn = nt;
 }
 
 
@@ -50,15 +54,7 @@ function checkVictory(){
     block_2_3 = $("#block_2_3").html();
     block_3_3 = $("#block_3_3").html();
 
-    //Checking draw
-    if ((block_1_1 != "") && (block_1_2 != "") && (block_1_3 != "") &&
-       (block_2_1 != "") && (block_2_2 != "") && (block_2_3 != "") &&
-       (block_3_1 != "") && (block_3_2 != "") && (block_3_3 != "")){
-       alert("Draw!");
-       return true;
-    }
-
-
+    
     //Horizontals
     if (block_1_1 != "")
         if ((block_1_1 == block_2_1) && (block_1_1 == block_3_1)){
@@ -106,6 +102,16 @@ function checkVictory(){
             victory(block_1_1);
             return true;
         }
+    
+    //Checking draw
+    if ((block_1_1 != "") && (block_1_2 != "") && (block_1_3 != "") &&
+       (block_2_1 != "") && (block_2_2 != "") && (block_2_3 != "") &&
+       (block_3_1 != "") && (block_3_2 != "") && (block_3_3 != "")){
+       alert("Draw!");
+       return true;
+    }
+    
+    return false;
 
 
 }
@@ -126,5 +132,4 @@ function reset(){
     $("#block_1_3").html("");            
     $("#block_2_3").html("");
     $("#block_3_3").html("");
-    startedWith = turn;
 }

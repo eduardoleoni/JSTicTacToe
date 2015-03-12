@@ -1,7 +1,8 @@
  function computerPlays(){
     
+    console.log(turn + playerTurn);
 
-    if (turn !== playerTurn){
+    if (turn != playerTurn){
     
         if (checksRiskOfLosingOrWinningPossibility() === false){
             intelligentPlay();
@@ -227,25 +228,3 @@ function randomPlay(){
 }
 
 
-function checksRightTurn(){
-    //Couldn't identify the reason why, but sometimes the turns are mixed up, this make sure it doesn't
-    os = 0;
-    xs = 0;
-    $( ".block" ).each(function( index ) {
-        if ($("#"+this.id).html() == "o"){
-            os = os + 1;
-        }
-        
-        if ($("#"+this.id).html() == "x"){
-            xs = xs + 1;
-        }
-    });
-    
-    if (startedWith == "x"){
-        if ((xs <= os) && (turn == "o"))
-            changeTurn();
-    }else{
-        if ((xs >= os) && (turn == "x"))
-            changeTurn();
-    }
-}

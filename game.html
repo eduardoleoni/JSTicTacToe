@@ -44,18 +44,14 @@
             
             turn = randTurn();
             playerTurn = turn;
-            startedWith = playerTurn;
             againstComputer = true;
-            setInterval(computerPlays, 500);
             
         });
         
         $( ".block" ).click(function() {
-            checksRightTurn();
+            
             if (playerTurn === turn){
                 draw(this.id);
-            }else{
-                computerPlays();
             }
         });
         
